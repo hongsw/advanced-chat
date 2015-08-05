@@ -1,0 +1,8 @@
+{
+  "name":"advanced-chat",
+  "scripts":{
+    "postdeploy":"npm start"
+  },
+  "env":{},
+  "addons":[]
+}
