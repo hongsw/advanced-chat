@@ -97,8 +97,8 @@ $(document).ready(function() {
   $("#main-chat-screen").hide();
   $("#errors").hide();
   $("#name").focus();
-  $("#join").attr('disabled', 'disabled'); 
-  
+  $("#join").attr('disabled', 'disabled');
+
   if ($("#name").val() === "") {
     $("#join").attr('disabled', 'disabled');
   }
@@ -125,7 +125,7 @@ $(document).ready(function() {
   $("#name").keypress(function(e){
     var name = $("#name").val();
     if(name.length < 2) {
-      $("#join").attr('disabled', 'disabled'); 
+      $("#join").attr('disabled', 'disabled');
     } else {
       $("#errors").empty();
       $("#errors").hide();
@@ -211,7 +211,7 @@ $(document).ready(function() {
           $("#errors").empty();
           $("#errors").show();
           $("#errors").append("Room <i>" + roomName + "</i> already exists");
-        } else {      
+        } else {
         if (roomName.length > 0) { //also check for roomname
           socket.emit("createRoom", roomName);
           $("#errors").empty();
@@ -232,7 +232,7 @@ $(document).ready(function() {
     var roomID = $(this).attr("id");
     socket.emit("removeRoom", roomID);
     $("#createRoom").show();
-  }); 
+  });
 
   $("#leave").click(function() {
     var roomID = myRoomID;
@@ -264,7 +264,7 @@ $(document).ready(function() {
               $(this).prev('.tt-hint').addClass('hint-lg');
         });
       });
-      
+
       console.log(peopleOnline);
     } else {
       console.log('remove typeahead');
@@ -348,7 +348,7 @@ socket.on("history", function(data) {
   socket.on("update-people", function(data){
     //var peopleOnline = [];
     $("#people").empty();
-    $('#people').append("<li class=\"list-group-item active\">People online <span class=\"badge\">"+data.count+"</span></li>");
+    $('#people').append("<li class=\"list-group-item active\">점속한 키보드들 <span class=\"badge\">"+data.count+"</span></li>");
     $.each(data.people, function(a, obj) {
       if (!("country" in obj)) {
         html = "";
@@ -389,14 +389,14 @@ socket.on("history", function(data) {
 
   socket.on("roomList", function(data) {
     $("#rooms").text("");
-    $("#rooms").append("<li class=\"list-group-item active\">List of rooms <span class=\"badge\">"+data.count+"</span></li>");
-     if (!jQuery.isEmptyObject(data.rooms)) { 
+    $("#rooms").append("<li class=\"list-group-item active\">방목록들이요<span class=\"badge\">"+data.count+"</span></li>");
+     if (!jQuery.isEmptyObject(data.rooms)) {
       $.each(data.rooms, function(id, room) {
         var html = "<button id="+id+" class='joinRoomBtn btn btn-default btn-xs' >Join</button>" + " " + "<button id="+id+" class='removeRoomBtn btn btn-default btn-xs'>Remove</button>";
         $('#rooms').append("<li id="+id+" class=\"list-group-item\"><span>" + room.name + "</span> " + html + "</li>");
       });
     } else {
-      $("#rooms").append("<li class=\"list-group-item\">There are no rooms yet.</li>");
+      $("#rooms").append("<li class=\"list-group-item\">첫번째 채팅방을 만들어 보아~</li>");
     }
   });
 
@@ -404,8 +404,12 @@ socket.on("history", function(data) {
     myRoomID = data.id;
   });
 
+  socket.on("createRoomCall", function(data) {
+    $("#createRoom").trigger("click");
+  });
+
   socket.on("disconnect", function(){
-    $("#msgs").append("<li><strong><span class='text-warning'>The server is not available</span></strong></li>");
+    $("#msgs").append("<li><strong><span class='text-warning'>섭관리가 상당히 힘드렁요~ 땀 삐질</span></strong></li>");
     $("#msg").attr("disabled", "disabled");
     $("#send").attr("disabled", "disabled");
   });
