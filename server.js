@@ -8,7 +8,7 @@ var express = require('express')
 , _ = require('underscore')._;
 
 app.configure(function() {
-	var port = process.env.PORT || 3000;
+	var port = process.env.PORT || 5000;
 	//app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000	);
 	app.set('port', port	);
   //app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
