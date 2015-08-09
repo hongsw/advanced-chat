@@ -19,13 +19,14 @@ app.configure(function() {
 	app.set('views', __dirname + '/views');
 	app.engine('html', require('ejs').renderFile);
 
-	/* Store process-id (as priviledged user) */
-	try {
-	    npid.create('/var/run/advanced-chat.pid', true);
-	} catch (err) {
-	    console.log(err);
-	    //process.exit(1);
-	}
+	// heroku에서는 파일을 만들 수 없다. 
+	// /* Store process-id (as priviledged user) */
+	// try {
+	//     npid.create('/var/run/advanced-chat.pid', true);
+	// } catch (err) {
+	//     console.log(err);
+	//     //process.exit(1);
+	// }
 
 });
 
