@@ -7,6 +7,7 @@ var express = require('express')
 , Room = require('./room.js')
 , _ = require('underscore')._;
 
+
 app.configure(function() {
 	var port = process.env.PORT || 5000;
 	//app.set('port', process.env.OPENSHIFT_NODEJS_PORT || 3000	);
@@ -14,11 +15,11 @@ app.configure(function() {
   //app.set('ipaddr', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1");
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
-	app.use(express.static(__dirname + '/public'));
-	app.use('/components', express.static(__dirname + '/components'));
-	app.use('/js', express.static(__dirname + '/js'));
-	app.use('/icons', express.static(__dirname + '/icons'));
-	app.set('views', __dirname + '/views');
+	app.use(express.static(process.env.PWD  + '/public'));
+	app.use('/components', express.static(process.env.PWD  + '/components'));
+	app.use('/js', express.static(process.env.PWD  + '/js'));
+	app.use('/icons', express.static(process.env.PWD  + '/icons'));
+	app.set('views', process.env.PWD  + '/views');
 	app.engine('html', require('ejs').renderFile);
 
 	// heroku에서는 파일을 만들 수 없다.
